@@ -3,8 +3,6 @@ dia = int(data[0:2])
 mes = int(data[3:5])
 ano = int(data[6:10])
 
-print(dia,mes,ano)
-
 if mes <= 12 and mes > 0:
     if (ano % 4 == 0 and ano % 100 != 0) or (ano % 400 == 0):
         if mes == 1:
@@ -79,7 +77,7 @@ if mes <= 12 and mes > 0:
                 print(f"A data formatada é {data_formatada}")
             else:
                 print("O dia está incorreto!")
-     
+
     elif (ano % 4 != 0 and ano % 100 == 0) or (ano % 400 != 0):
         if mes == 1:
             if dia == 31:
@@ -153,6 +151,6 @@ if mes <= 12 and mes > 0:
                 print(f"A data formatada é {data_formatada}")
             else:
                 print("O dia está incorreto!")
-                
+
 else:
     print("O mês está incorreto!")
