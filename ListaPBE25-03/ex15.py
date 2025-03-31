@@ -2,7 +2,6 @@ import re
 
 senha = input("Digite sua senha: ")
 
-# Verifica se a senha tem pelo menos 8 caracteres
 if len(senha) >= 8:
     if re.search(r"[!@#$%^&*(),.?"":{}|<>]", senha):
         if re.search(r"[a-z]", senha):
