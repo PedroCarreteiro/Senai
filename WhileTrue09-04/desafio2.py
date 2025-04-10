@@ -26,9 +26,12 @@ while True:
     else:
         if chute in palavra_aleatoria:
             lista_chutes.append(chute)
-            for i, letra in enumerate(lista_palavra_aleatoria): #enumerate é usado para percorrer a palavra e saber a posição do chute e o caractere naquela posição
-                if letra == chute: #se letra atual == chute
-                    lista_palavra_crip[i] = chute #revelar chute na posição
+            #percorrer a palavra e descobrir se tem algo de acordo com  chute
+            i = 0
+            for letra in lista_palavra_aleatoria:
+                if letra == chute: #se a letra naquele i for == chute
+                    lista_palavra_crip[i] = chute #revelar o chute na posição do i
+                i += 1
             print(f"Você acertou")
         else:
             lista_chutes.append(chute)
