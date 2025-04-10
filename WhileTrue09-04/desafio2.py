@@ -38,7 +38,7 @@ while True:
             lista_erros.append(chute)
             tentativas += 1
 
-    palavra_atual = ''.join(lista_palavra_crip) #lita em string
+    palavra_atual = ''.join(lista_palavra_crip) #lista em string
     print(f"Essa é a palavra atualmente: {palavra_atual}.\n"
           f"Essas são as letras erradas até agora: {lista_erros}")
 
