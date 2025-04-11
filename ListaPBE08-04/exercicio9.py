@@ -1,7 +1,7 @@
 numero = 0
 lista_numeros = []
 
-for numero in range(1, 1000):
+for numero in range(1, 10000):
     lista_contador = []
 
     for i in range(1, numero):
