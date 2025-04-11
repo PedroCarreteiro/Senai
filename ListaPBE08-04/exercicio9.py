@@ -1,7 +1,7 @@
 numero = 0
 lista_numeros = []
 
-for numero in range(1, 10000): #for para numero de 1 até 10000
+for numero in range(1, 10001): #for para numero de 1 até 10000
     lista_contador = [] #zerar a lista de contador
 
     for i in range(1, numero): #for para contador de 1 até numero
