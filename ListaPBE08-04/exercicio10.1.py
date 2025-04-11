@@ -1,12 +1,10 @@
-# 10 - Números de Kaprekar
-
 kaprekar = []
 
 inicio = int(input("Digite o início do intervalo que deseja verificar: "))
 fim = int(input("Digite o fim do intervalo que deseja verificar: "))
 
 for numero in range(inicio, fim + 1):
-    verificacao = "{:02d}".format(numero ** 2)
+    verificacao = "{:02d}".format(numero ** 2) #fazer com que o número tenha no mínimo 2 digitos
 
     # Separando em direita e esquerda
     esquerda = []
