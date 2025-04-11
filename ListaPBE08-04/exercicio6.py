@@ -9,7 +9,7 @@ if numeros > 0:
 
     while i < numeros: #enquanto contador for menor que a quantidade de numeros
         sequencia += str(a)
-        if i < numeros - 1: #se não é o último termo
+        if i < numeros - 1: #se não é o último termo (o if com o -1 é para não imprimir a vírgula)
             sequencia += ", "
         a, b = b, a + b #substituir a por b e b por a + b
         i += 1
