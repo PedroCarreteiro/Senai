@@ -12,4 +12,4 @@ for numero in range(1, 10000):
     if soma == numero:
         lista_numeros.append(numero)
 
-print(f"A lista de números perfeitos de 1 até 1000 é {lista_numeros}")
+print(f"A lista de números perfeitos de 1 até 10000 é {lista_numeros}")
