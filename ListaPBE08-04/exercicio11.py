@@ -116,21 +116,20 @@ while iniciar == 1:
 
             #Condições para finalizar o jogo:
 
+            #Empate
+            if vida_jogador <= 0 and vida_cpu <= 0:
+                print("Empate")
+
             #Jogador ganhou
             if vida_jogador > vida_cpu and vida_cpu <= 0:
-                if vida_jogador == vida_cpu:
-                    print("Empate!")
-                else:
-                    print("Você ganhou!")
-                    break
+                print("Você ganhou!")
+                break
 
             #Cpu ganhou
             elif vida_cpu > vida_jogador and vida_jogador <= 0:
-                if vida_cpu == vida_jogador:
-                    print("Empate!")
-                else:
-                    print("Você perdeu!")
-                    break
+                print("Você perdeu!")
+                break
+
 
     #Se sair selecionado
     elif iniciar == 2:
