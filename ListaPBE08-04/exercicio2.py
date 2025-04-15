@@ -3,7 +3,7 @@ tamanho = N
 soma = 0
 i = 0
 
-if N <= 0:
+if N < 0:
     print("INVALIDO")
 else:
     while i != tamanho:
