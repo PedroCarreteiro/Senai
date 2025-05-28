@@ -1,0 +1,29 @@
+Arquivos utilizados:
+
+TXT:
+-Arquivo puro e sem formatação
+-Uso comum: para armazenar e ler texto simples, como configurações ou anotações
+
+CSV:
+-Separado por vírgula
+-Usado para armazenar tabelas de dados de forma simples
+
+JSON:
+-JavaScip Object Notation, armazenar informações de forma organizada e fácil de acessar
+-Usado para trocar dados entre um servidor web e um cliente, ou armazenar configurações complexas
+
+XML:
+-Linguagem de marcação que define um conjunto de regras para codificar documentos de forma que sejam tanto legíveis para
+humanos humanos quanto máquinas
+-usado para configurações de aplicativos, trasmissão de dados via APIs e armazenamento de informações
+
+Exemplo:
+<pessoa>
+    <nome>João</nome>
+    <idade>25></idade>
+    <profissao>Engenheiro</profissao>
+</pessoa>
+
+Excel:
+-Formato em planilha padrão
+-Ambientes de negócios, educação e ciência de dados para cirar tabelas, gráficos e relatórios complexos
