@@ -80,6 +80,7 @@ class ContaBancaria:
     def __init__(self, titular, saldo):
         self.titular = titular #atriuto público
         self.__saldo = saldo #atributo encapsulado
+
     # def get_saldo(self):
     #     return self.__saldo
     #
@@ -88,6 +89,8 @@ class ContaBancaria:
     #         raise ValueError("Saldo não pode ser negativo") #tratando erro
     #     self.__saldo = valor
 
+    # essa parte de baixo faz a mesma coisa q a de cima
+    
     @property #decorator que vai pegar as informações desse atributo
     def saldo(self):
         return self.__saldo
