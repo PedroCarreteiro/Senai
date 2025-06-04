@@ -65,8 +65,8 @@ elif linha_filtrada[4] == "0":
 
 #verificar se a última data (que é a primeira da lista) é igual a data atual e mandar mensagem 
 if linha_data == data_hoje:
-    kit.sendwhatmsg_instantly("+5519971547538",
+    kit.sendwhatmsg_instantly("+numero",
                             f"Estoque em {linha_data}: Esteira1: {estoque1} | Esteira2: {estoque2} | Esteira3: {estoque3}")
 else:
-    kit.sendwhatmsg_instantly("+5519971547538",
+    kit.sendwhatmsg_instantly("+numero",
                             f"Não foi encontrado nenhum dado do dia atual")
