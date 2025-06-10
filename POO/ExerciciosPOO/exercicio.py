@@ -52,14 +52,12 @@ class ColecaoLivros(ItemBiblioteca):
         return True
 
     def obter_info(self):
-        #super().obter_info()     
-        print(f"\nNome da coleção: {self.titulo}"
-              f"\nAno: {self.ano_publicacao}")
-        
+        print(f"\nNome da coleção: {self.titulo}")
+        print(f"Ano: {self.ano_publicacao}")
         if self.disponivel:
             print("Disponível: Sim")
         else:
-            print("Disponível: Não")
+            print("Disponível: Não")    
 
         print("Livros da coleção: ")
         
@@ -68,31 +66,31 @@ class ColecaoLivros(ItemBiblioteca):
 
 
 class Revista(ItemBiblioteca):
-    def __init__(self, edicao: int, titulo: str, ano_publicacao: int, disponivel: bool = True):
+    def __init__(self, titulo: str, ano_publicacao: int, edicao: int, disponivel: bool = True):
         super().__init__(titulo, ano_publicacao, disponivel)
         self.edicao = edicao
 
-    def atualizar_edicao(self, nova_edicao):
-        nova_edicao = int(input("Digite o número da nova edição: "))
+    def atualizar_edicao(self):
+        nova_edicao = int(input("\nDigite o número da nova edição: "))
         if nova_edicao > 0:
-            print("Edição atualizada!")
+            print("\nEdição atualizada!")
             self.edicao = nova_edicao
         else:
-            print("Número de edição inválido!")
+            print("\nNúmero de edição inválido!")
 
     def restringir_emprestimo(self):
         if self.disponivel == True:
-            dias = int(input("Digite a quantidade de dias que você deseja emprestar a revista: "))
+            dias = int(input("\nDigite a quantidade de dias que você deseja emprestar a revista: "))
             if self.ano_publicacao >= 2000 and dias <= 10:
-                print("Você emprestou a revista!")
+                print("\nVocê emprestou a revista!")
                 self.disponivel = False
             elif self.ano_publicacao < 2000 and dias <= 7:
-                print("Você emprestou a revista!")
+                print("\nVocê emprestou a revista!")
                 self.disponivel = False
             else:
-                print(f"Você não pode emprestar a revista {self.titulo} pois esse número de dias ultrapassa o limite máximo de empréstimo determinado para esta revista.")
+                print(f"\nVocê não pode emprestar a revista {self.titulo} pois esse número de dias ultrapassa o limite máximo de empréstimo determinado para esta revista.")
         else:
-            print("A revista já está em empréstimo!")
+            print("\nA revista já está em empréstimo!")
 
     def obter_info(self):
         print(f"\nNome da revista: {self.titulo}")
@@ -100,8 +98,8 @@ class Revista(ItemBiblioteca):
         if self.disponivel:
             print("Disponível: Sim")
         else:
-            print("Disponível: Não")  
-        print(f"A edição da revita é {self.edicao}")     
+            print("Disponível: Não")
+        print(f"A edição da revista é {self.edicao}")     
 
 
 
@@ -122,4 +120,12 @@ colecao.adicionar_livro(livro3)
 colecao.verificar_disponibilidade_colecao()
 
 colecao.obter_info()
+
+revista = Revista("Revista1",2031, 1)
+
+revista.atualizar_edicao()
+
+revista.restringir_emprestimo()
+
+revista.obter_info()
 
