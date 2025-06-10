@@ -28,7 +28,7 @@ class ItemBiblioteca:
         #     "ano_publicacao": self.ano_publicacao,
         #     "disponivel": self.disponivel
         # }
-        print(f"\nNome da coleção: {self.titulo}")
+        print(f"\nNome do livro: {self.titulo}")
         print(f"Ano: {self.ano_publicacao}")
         if self.disponivel:
             print("Disponível: Sim")
@@ -47,11 +47,12 @@ class ColecaoLivros(ItemBiblioteca):
         #verifcar se há algum item indisponível
         for livro in self.lista_livros:
             if not livro.disponivel:
+                self.disponivel = False
                 return False 
         return True
 
     def obter_info(self):
-        super().obter_info()        
+        #super().obter_info()     
         print(f"\nNome da coleção: {self.titulo}"
               f"\nAno: {self.ano_publicacao}")
         
@@ -74,9 +75,33 @@ class Revista(ItemBiblioteca):
     def atualizar_edicao(self, nova_edicao):
         nova_edicao = int(input("Digite o número da nova edição: "))
         if nova_edicao > 0:
+            print("Edição atualizada!")
             self.edicao = nova_edicao
         else:
             print("Número de edição inválido!")
+
+    def restringir_emprestimo(self):
+        if self.disponivel == True:
+            dias = int(input("Digite a quantidade de dias que você deseja emprestar a revista: "))
+            if self.ano_publicacao >= 2000 and dias <= 10:
+                print("Você emprestou a revista!")
+                self.disponivel = False
+            elif self.ano_publicacao < 2000 and dias <= 7:
+                print("Você emprestou a revista!")
+                self.disponivel = False
+            else:
+                print(f"Você não pode emprestar a revista {self.titulo} pois esse número de dias ultrapassa o limite máximo de empréstimo determinado para esta revista.")
+        else:
+            print("A revista já está em empréstimo!")
+
+    def obter_info(self):
+        print(f"\nNome da revista: {self.titulo}")
+        print(f"Ano: {self.ano_publicacao}")
+        if self.disponivel:
+            print("Disponível: Sim")
+        else:
+            print("Disponível: Não")  
+        print(f"A edição da revita é {self.edicao}")     
 
 
 
@@ -89,11 +114,12 @@ livro1.emprestar()
 livro1.devolver()
 livro1.obter_info()
 
-
-colecao = ColecaoLivros("Colecao1", 2010, True)
+colecao = ColecaoLivros("Colecao1", 2010)
 colecao.adicionar_livro(livro1)
 colecao.adicionar_livro(livro2)
 colecao.adicionar_livro(livro3)
+
+colecao.verificar_disponibilidade_colecao()
 
 colecao.obter_info()
 
