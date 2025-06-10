@@ -35,7 +35,7 @@ data_hoje = str(data_hoje)
 # vermelho = "🔴"
 # preto = "⚫"
 
-# verificar a situação de cada estoque e atrinuir a situação neles
+# verificar a situação de cada estoque e atribuir a situação neles
 
 estoque = ["⚫","⚫","⚫"]
 
