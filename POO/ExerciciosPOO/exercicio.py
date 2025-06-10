@@ -28,7 +28,7 @@ class ItemBiblioteca:
         #     "ano_publicacao": self.ano_publicacao,
         #     "disponivel": self.disponivel
         # }
-        print(f"\nTítulo: {self.titulo}")
+        print(f"\nNome da coleção: {self.titulo}")
         print(f"Ano: {self.ano_publicacao}")
         if self.disponivel:
             print("Disponível: Sim")
@@ -52,13 +52,33 @@ class ColecaoLivros(ItemBiblioteca):
 
     def obter_info(self):
         super().obter_info()        
-        print(f"\nNome Coleção: {self.titulo}"
-              f"\nAno: {self.ano_publicacao}"
-              f"\nDisponível: {self.disponivel}"
-              f"\nLivros da coleção:")
+        print(f"\nNome da coleção: {self.titulo}"
+              f"\nAno: {self.ano_publicacao}")
+        
+        if self.disponivel:
+            print("Disponível: Sim")
+        else:
+            print("Disponível: Não")
+
+        print("Livros da coleção: ")
         
         for i in range(len(self.lista_livros)):
             print(self.lista_livros[i].titulo)
+
+
+class Revista(ItemBiblioteca):
+    def __init__(self, edicao: int, titulo: str, ano_publicacao: int, disponivel: bool = True):
+        super().__init__(titulo, ano_publicacao, disponivel)
+        self.edicao = edicao
+
+    def atualizar_edicao(self, nova_edicao):
+        nova_edicao = int(input("Digite o número da nova edição: "))
+        if nova_edicao > 0:
+            self.edicao = nova_edicao
+        else:
+            print("Número de edição inválido!")
+
+
 
 
 livro1 = ItemBiblioteca("livro1", 2004, True)
