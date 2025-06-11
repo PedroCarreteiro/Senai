@@ -153,10 +153,21 @@ class RelatorioBiblioteca:
         relatorio = "\nItens disponíveis:\n"
         for titulo in titulos_disponiveis:
             relatorio += f"- {titulo}\n"
-        relatorio += f"Total de itens disponíveis: {total_disponiveis}"
+        relatorio += f"\nTotal de itens disponíveis: {total_disponiveis}"
         print(relatorio)
     
     def gerar_relatorio_emprestimos(self):
+        titulos_emprestados = []
+        for titulo, item in self.biblioteca.items_dicionario.items():
+            if item.disponivel == False:
+                titulos_emprestados.append(titulo)
+
+        total_emprestados = len(titulos_emprestados)
+        relatorio = "\nItens emprestados:\n"
+        for titulo in titulos_emprestados:
+            relatorio += f"- {titulo}\n"
+        print(relatorio)
+
         emprestados = self.biblioteca.contar_itens_emprestados()
         total = 0
         for _ in self.biblioteca.items_dicionario:
@@ -170,11 +181,9 @@ class RelatorioBiblioteca:
         print(f"Itens emprestados: {emprestados}"
               f"\nProporção de itens emprestados: {proporcao:.2f}"
               f"\nPorcentagem de items emprestados: {proporcao*100}%")
-
-
-
-
-
+        
+        
+# ==== Testes ====
 
 livro1 = ItemBiblioteca("livro1", 2004, True)
 livro2 = ItemBiblioteca("livro2", 2005, True)
