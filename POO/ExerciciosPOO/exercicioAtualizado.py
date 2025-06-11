@@ -102,39 +102,71 @@ class Revista(ItemBiblioteca):
         print(f"A edição da revista é {self.edicao}")
 
 
-class Biblioteca():
+class Biblioteca:
     def __init__(self):
         self.items_dicionario = {}
 
-    def adicionar_item(self, item):
-        self.items_dicionario['titulo'] = self.item 
+    def adicionar_item(self, item: ItemBiblioteca):
+        if item.titulo in self.items_dicionario:
+            print("Item já cadastrado na biblioteca!")
+        else:
+            self.items_dicionario[item.titulo] = item
+            print("Item adicionado a biblioteca!") 
+
+    def remover_titulo(self, titulo):
+        if titulo in self.items_dicionario:
+            del self.items_dicionario[titulo]
+            print("Item removido da biblioteca!")
+        else:
+            print("Este item não está contido na biblioteca!")
+
+    def listar_itens_disponiveis(self):
+        titulos_disponiveis = []
+        for titulo, item in self.items_dicionario.items():
+            if item.disponivel:
+                titulos_disponiveis.append(titulo)
+        return titulos_disponiveis
+    
+    def contar_itens_emprestados(self):
+        i = 0
+        for item in self.items_dicionario.values():
+            if not item.disponivel:
+                i += 1
+        return i
+
+class RelatorioBiblioteca:
+    def __init__(self, biblioteca: Biblioteca):
+        self.biblioteca = biblioteca
+
+    def gerar_relatorio_completo(self):
+        print("\nRelatório completo: ")
+        for item in self.biblioteca.items_dicionario.values():
+            item.obter_info()
 
 
 
 
+# livro1 = ItemBiblioteca("livro1", 2004, True)
+# livro2 = ItemBiblioteca("livro2", 2005, True)
+# livro3 = ItemBiblioteca("livro3", 2043, False)
 
+# livro1.emprestar()
+# livro1.devolver()
+# livro1.obter_info()
 
-livro1 = ItemBiblioteca("livro1", 2004, True)
-livro2 = ItemBiblioteca("livro2", 2005, True)
-livro3 = ItemBiblioteca("livro3", 2043, False)
+# colecao = ColecaoLivros("Colecao1", 2010)
+# colecao.adicionar_livro(livro1)
+# colecao.adicionar_livro(livro2)
+# colecao.adicionar_livro(livro3)
 
-livro1.emprestar()
-livro1.devolver()
-livro1.obter_info()
+# colecao.verificar_disponibilidade_colecao()
 
-colecao = ColecaoLivros("Colecao1", 2010)
-colecao.adicionar_livro(livro1)
-colecao.adicionar_livro(livro2)
-colecao.adicionar_livro(livro3)
+# colecao.obter_info()
 
-colecao.verificar_disponibilidade_colecao()
+# revista = Revista("Revista1",2031, 1)
 
-colecao.obter_info()
+# revista.atualizar_edicao()
 
-revista = Revista("Revista1",2031, 1)
+# revista.restringir_emprestimo()
 
-revista.atualizar_edicao()
-
-revista.restringir_emprestimo()
-
-revista.obter_info()
+# revista.obter_info()
