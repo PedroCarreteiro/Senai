@@ -108,10 +108,10 @@ class Biblioteca:
 
     def adicionar_item(self, item: ItemBiblioteca):
         if item.titulo in self.items_dicionario:
-            print("Item já cadastrado na biblioteca!")
+            print("\nItem já cadastrado na biblioteca!")
         else:
             self.items_dicionario[item.titulo] = item
-            print("Item adicionado a biblioteca!") 
+            print("\nItem adicionado a biblioteca!") 
 
     def remover_titulo(self, titulo):
         if titulo in self.items_dicionario:
@@ -143,30 +143,70 @@ class RelatorioBiblioteca:
         for item in self.biblioteca.items_dicionario.values():
             item.obter_info()
 
+    def gerar_relatorio_disponibilidade(self):
+        titulos_disponiveis = []
+        for titulo, item in self.biblioteca.items_dicionario.items():
+            if item.disponivel:
+                titulos_disponiveis.append(titulo)
+
+        total_disponiveis = len(titulos_disponiveis)
+        relatorio = "\nItens disponíveis:\n"
+        for titulo in titulos_disponiveis:
+            relatorio += f"- {titulo}\n"
+        relatorio += f"Total de itens disponíveis: {total_disponiveis}"
+        print(relatorio)
+    
+    def gerar_relatorio_emprestimos(self):
+        emprestados = self.biblioteca.contar_itens_emprestados()
+        total = 0
+        for _ in self.biblioteca.items_dicionario:
+            total += 1
+
+        if total > 0:
+            proporcao = emprestados / total
+        else:
+            proporcao = 0
+
+        print(f"Itens emprestados: {emprestados}\nProporção de itens emprestados: {proporcao:.2f}")
 
 
 
-# livro1 = ItemBiblioteca("livro1", 2004, True)
-# livro2 = ItemBiblioteca("livro2", 2005, True)
-# livro3 = ItemBiblioteca("livro3", 2043, False)
 
-# livro1.emprestar()
-# livro1.devolver()
-# livro1.obter_info()
 
-# colecao = ColecaoLivros("Colecao1", 2010)
-# colecao.adicionar_livro(livro1)
-# colecao.adicionar_livro(livro2)
-# colecao.adicionar_livro(livro3)
 
-# colecao.verificar_disponibilidade_colecao()
+livro1 = ItemBiblioteca("livro1", 2004, True)
+livro2 = ItemBiblioteca("livro2", 2005, True)
+livro3 = ItemBiblioteca("livro3", 2043, False)
 
-# colecao.obter_info()
+livro1.emprestar()
+livro1.devolver()
+livro1.obter_info()
 
-# revista = Revista("Revista1",2031, 1)
+colecao = ColecaoLivros("Colecao1", 2010)
+colecao.adicionar_livro(livro1)
+colecao.adicionar_livro(livro2)
+colecao.adicionar_livro(livro3)
 
-# revista.atualizar_edicao()
+colecao.verificar_disponibilidade_colecao()
 
-# revista.restringir_emprestimo()
+colecao.obter_info()
 
-# revista.obter_info()
+revista = Revista("Revista1",2031, 1)
+
+revista.atualizar_edicao()
+
+revista.restringir_emprestimo()
+
+revista.obter_info()
+
+biblioteca = Biblioteca()
+biblioteca.adicionar_item(livro1)
+biblioteca.adicionar_item(livro2)
+biblioteca.adicionar_item(livro3)
+biblioteca.adicionar_item(colecao)
+biblioteca.adicionar_item(revista)
+
+relatorio = RelatorioBiblioteca(biblioteca)
+relatorio.gerar_relatorio_completo()
+relatorio.gerar_relatorio_disponibilidade()
+relatorio.gerar_relatorio_emprestimos()
