@@ -167,7 +167,9 @@ class RelatorioBiblioteca:
         else:
             proporcao = 0
 
-        print(f"Itens emprestados: {emprestados}\nProporção de itens emprestados: {proporcao:.2f}")
+        print(f"Itens emprestados: {emprestados}"
+              f"\nProporção de itens emprestados: {proporcao:.2f}"
+              f"\nPorcentagem de items emprestados: {proporcao*100}%")
 
 
 
