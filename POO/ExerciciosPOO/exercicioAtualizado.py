@@ -192,7 +192,7 @@ class RelatorioBiblioteca:
 
 livro1 = ItemBiblioteca("livro1", 2004, True)
 livro2 = ItemBiblioteca("livro2", 2005, True)
-livro3 = ItemBiblioteca("livro3", 2043, False)
+livro3 = ItemBiblioteca("livro3", 2043, True)
 
 livro1.emprestar()
 livro1.devolver()
