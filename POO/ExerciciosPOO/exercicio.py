@@ -99,19 +99,106 @@ class Revista(ItemBiblioteca):
             print("Disponível: Sim")
         else:
             print("Disponível: Não")
-        print(f"A edição da revista é {self.edicao}")     
+        print(f"A edição da revista é {self.edicao}")
 
 
+class Biblioteca:
+    def __init__(self):
+        self.itens_dicionario = {}
 
+    def adicionar_item(self, item: ItemBiblioteca):
+        if item.titulo in self.itens_dicionario:
+            print("\nItem já cadastrado na biblioteca!")
+        else:
+            self.itens_dicionario[item.titulo] = item
+            print("\nItem adicionado a biblioteca!") 
+
+    def remover_titulo(self, titulo):
+        if titulo in self.itens_dicionario:
+            del self.itens_dicionario[titulo]
+            print("\nItem removido da biblioteca!")
+        else:
+            print("\nEste item não está contido na biblioteca!")
+
+    def listar_itens_disponiveis(self):
+        titulos_disponiveis = []
+        for titulo, item in self.itens_dicionario.items():
+            if item.disponivel:
+                titulos_disponiveis.append(titulo)
+        # print(f"\nTotal de itens disponíveis: {len(titulos_disponiveis)}")
+        return titulos_disponiveis
+
+    
+    def contar_itens_emprestados(self):
+        i = 0
+        for item in self.itens_dicionario.values():
+            if not item.disponivel:
+                i += 1
+        # print(f"\nTotal de itens emprestados: {i}")
+        return i
+
+class RelatorioBiblioteca:
+    def __init__(self, biblioteca: Biblioteca):
+        self.biblioteca = biblioteca
+
+    def gerar_relatorio_completo(self):
+        print("\nRelatório completo: ")
+        for item in self.biblioteca.itens_dicionario.values():
+            item.obter_info()
+
+    def gerar_relatorio_disponibilidade(self):
+        titulos_disponiveis = []
+        for titulo, item in self.biblioteca.itens_dicionario.items():
+            if item.disponivel:
+                titulos_disponiveis.append(titulo)
+
+        total_disponiveis = len(titulos_disponiveis)
+        relatorio = "\nItens disponíveis:\n"
+        for titulo in titulos_disponiveis:
+            relatorio += f"- {titulo}\n"
+        relatorio += f"\nTotal de itens disponíveis: {total_disponiveis}"
+        print(relatorio)
+    
+    def gerar_relatorio_emprestimos(self):
+        titulos_emprestados = []
+        for titulo, item in self.biblioteca.itens_dicionario.items(): #items retorna chave e valor do dict
+            if item.disponivel == False:
+                titulos_emprestados.append(titulo)
+
+        total_emprestados = len(titulos_emprestados)
+        relatorio = "\nItens emprestados:\n"
+        for titulo in titulos_emprestados:
+            relatorio += f"- {titulo}\n"
+        print(relatorio)
+
+        emprestados = self.biblioteca.contar_itens_emprestados()
+        total = 0
+        for _ in self.biblioteca.itens_dicionario:
+            total += 1
+
+        if total > 0:
+            proporcao = emprestados / total
+        else:
+            proporcao = 0
+
+        print(f"Total de itens emprestados: {emprestados}"
+              f"\nProporção de itens emprestados: {proporcao:.2f}"
+              f"\nPorcentagem de itens emprestados: {proporcao*100}%")
+        
+        
+# ==== Testes ====
+
+#Item
 
 livro1 = ItemBiblioteca("livro1", 2004, True)
 livro2 = ItemBiblioteca("livro2", 2005, True)
-livro3 = ItemBiblioteca("livro3", 2043, False)
+livro3 = ItemBiblioteca("livro3", 2043, True)
 
 livro1.emprestar()
 livro1.devolver()
 livro1.obter_info()
 
+#Coleção
 colecao = ColecaoLivros("Colecao1", 2010)
 colecao.adicionar_livro(livro1)
 colecao.adicionar_livro(livro2)
@@ -121,11 +208,29 @@ colecao.verificar_disponibilidade_colecao()
 
 colecao.obter_info()
 
+
+#Revista
 revista = Revista("Revista1",2031, 1)
 
 revista.atualizar_edicao()
-
 revista.restringir_emprestimo()
-
 revista.obter_info()
 
+#Biblioteca
+biblioteca = Biblioteca()
+biblioteca.adicionar_item(livro1)
+biblioteca.adicionar_item(livro2)
+biblioteca.adicionar_item(livro3)
+biblioteca.remover_titulo("livro3")
+biblioteca.adicionar_item(livro3)
+biblioteca.adicionar_item(colecao)
+biblioteca.adicionar_item(revista)
+
+# biblioteca.listar_itens_disponiveis()
+# biblioteca.contar_itens_emprestados()
+
+#Relatório
+relatorio = RelatorioBiblioteca(biblioteca)
+relatorio.gerar_relatorio_completo()
+relatorio.gerar_relatorio_disponibilidade()
+relatorio.gerar_relatorio_emprestimos()
