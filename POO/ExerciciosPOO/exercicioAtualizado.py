@@ -104,34 +104,37 @@ class Revista(ItemBiblioteca):
 
 class Biblioteca:
     def __init__(self):
-        self.items_dicionario = {}
+        self.itens_dicionario = {}
 
     def adicionar_item(self, item: ItemBiblioteca):
-        if item.titulo in self.items_dicionario:
+        if item.titulo in self.itens_dicionario:
             print("\nItem já cadastrado na biblioteca!")
         else:
-            self.items_dicionario[item.titulo] = item
+            self.itens_dicionario[item.titulo] = item
             print("\nItem adicionado a biblioteca!") 
 
     def remover_titulo(self, titulo):
-        if titulo in self.items_dicionario:
-            del self.items_dicionario[titulo]
-            print("Item removido da biblioteca!")
+        if titulo in self.itens_dicionario:
+            del self.itens_dicionario[titulo]
+            print("\nItem removido da biblioteca!")
         else:
-            print("Este item não está contido na biblioteca!")
+            print("\nEste item não está contido na biblioteca!")
 
     def listar_itens_disponiveis(self):
         titulos_disponiveis = []
-        for titulo, item in self.items_dicionario.items():
+        for titulo, item in self.itens_dicionario.items():
             if item.disponivel:
                 titulos_disponiveis.append(titulo)
+        print(f"\nTotal de itens disponíveis: {len(titulos_disponiveis)}")
         return titulos_disponiveis
+
     
     def contar_itens_emprestados(self):
         i = 0
-        for item in self.items_dicionario.values():
+        for item in self.itens_dicionario.values():
             if not item.disponivel:
                 i += 1
+        print(f"\nTotal de itens emprestados: {i}")
         return i
 
 class RelatorioBiblioteca:
@@ -140,12 +143,12 @@ class RelatorioBiblioteca:
 
     def gerar_relatorio_completo(self):
         print("\nRelatório completo: ")
-        for item in self.biblioteca.items_dicionario.values():
+        for item in self.biblioteca.itens_dicionario.values():
             item.obter_info()
 
     def gerar_relatorio_disponibilidade(self):
         titulos_disponiveis = []
-        for titulo, item in self.biblioteca.items_dicionario.items():
+        for titulo, item in self.biblioteca.itens_dicionario.items():
             if item.disponivel:
                 titulos_disponiveis.append(titulo)
 
@@ -158,7 +161,7 @@ class RelatorioBiblioteca:
     
     def gerar_relatorio_emprestimos(self):
         titulos_emprestados = []
-        for titulo, item in self.biblioteca.items_dicionario.items():
+        for titulo, item in self.biblioteca.itens_dicionario.items(): #items retorna chave e valor do dict
             if item.disponivel == False:
                 titulos_emprestados.append(titulo)
 
@@ -170,7 +173,7 @@ class RelatorioBiblioteca:
 
         emprestados = self.biblioteca.contar_itens_emprestados()
         total = 0
-        for _ in self.biblioteca.items_dicionario:
+        for _ in self.biblioteca.itens_dicionario:
             total += 1
 
         if total > 0:
@@ -180,7 +183,7 @@ class RelatorioBiblioteca:
 
         print(f"Itens emprestados: {emprestados}"
               f"\nProporção de itens emprestados: {proporcao:.2f}"
-              f"\nPorcentagem de items emprestados: {proporcao*100}%")
+              f"\nPorcentagem de itens emprestados: {proporcao*100}%")
         
         
 # ==== Testes ====
@@ -214,8 +217,12 @@ biblioteca = Biblioteca()
 biblioteca.adicionar_item(livro1)
 biblioteca.adicionar_item(livro2)
 biblioteca.adicionar_item(livro3)
+biblioteca.remover_titulo("livro3")
+biblioteca.adicionar_item(livro3)
 biblioteca.adicionar_item(colecao)
 biblioteca.adicionar_item(revista)
+biblioteca.listar_itens_disponiveis()
+biblioteca.contar_itens_emprestados()
 
 relatorio = RelatorioBiblioteca(biblioteca)
 relatorio.gerar_relatorio_completo()
