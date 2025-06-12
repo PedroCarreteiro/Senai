@@ -125,7 +125,7 @@ class Biblioteca:
         for titulo, item in self.itens_dicionario.items():
             if item.disponivel:
                 titulos_disponiveis.append(titulo)
-        print(f"\nTotal de itens disponíveis: {len(titulos_disponiveis)}")
+        # print(f"\nTotal de itens disponíveis: {len(titulos_disponiveis)}")
         return titulos_disponiveis
 
     
@@ -134,7 +134,7 @@ class Biblioteca:
         for item in self.itens_dicionario.values():
             if not item.disponivel:
                 i += 1
-        print(f"\nTotal de itens emprestados: {i}")
+        # print(f"\nTotal de itens emprestados: {i}")
         return i
 
 class RelatorioBiblioteca:
@@ -181,12 +181,14 @@ class RelatorioBiblioteca:
         else:
             proporcao = 0
 
-        print(f"Itens emprestados: {emprestados}"
+        print(f"Total de itens emprestados: {emprestados}"
               f"\nProporção de itens emprestados: {proporcao:.2f}"
               f"\nPorcentagem de itens emprestados: {proporcao*100}%")
         
         
 # ==== Testes ====
+
+#Item
 
 livro1 = ItemBiblioteca("livro1", 2004, True)
 livro2 = ItemBiblioteca("livro2", 2005, True)
@@ -196,6 +198,7 @@ livro1.emprestar()
 livro1.devolver()
 livro1.obter_info()
 
+#Coleção
 colecao = ColecaoLivros("Colecao1", 2010)
 colecao.adicionar_livro(livro1)
 colecao.adicionar_livro(livro2)
@@ -205,14 +208,15 @@ colecao.verificar_disponibilidade_colecao()
 
 colecao.obter_info()
 
+
+#Revista
 revista = Revista("Revista1",2031, 1)
 
 revista.atualizar_edicao()
-
 revista.restringir_emprestimo()
-
 revista.obter_info()
 
+#Biblioteca
 biblioteca = Biblioteca()
 biblioteca.adicionar_item(livro1)
 biblioteca.adicionar_item(livro2)
@@ -221,9 +225,11 @@ biblioteca.remover_titulo("livro3")
 biblioteca.adicionar_item(livro3)
 biblioteca.adicionar_item(colecao)
 biblioteca.adicionar_item(revista)
-biblioteca.listar_itens_disponiveis()
-biblioteca.contar_itens_emprestados()
 
+# biblioteca.listar_itens_disponiveis()
+# biblioteca.contar_itens_emprestados()
+
+#Relatório
 relatorio = RelatorioBiblioteca(biblioteca)
 relatorio.gerar_relatorio_completo()
 relatorio.gerar_relatorio_disponibilidade()
